@@ -916,16 +916,14 @@
       });
     });
 
-    // 4. 3D Tilt Effect on Cards
+    // 4. 3D Tilt Effect on Standard Cards (About, Skills, Contact)
     document.querySelectorAll('.tilt').forEach(card => {
       card.addEventListener('mousemove', e => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        
         const rotateX = ((y - centerY) / centerY) * -10;
         const rotateY = ((x - centerX) / centerX) * 10;
         
@@ -943,17 +941,33 @@
     const btnRight = document.getElementById('slide-right');
 
     if (slider && btnLeft && btnRight) {
-      // Scroll amount (roughly the width of one card + gap)
       const scrollAmount = 350; 
-
       btnLeft.addEventListener('click', () => {
         slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
       });
-
       btnRight.addEventListener('click', () => {
         slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
       });
     }
+
+    // 6. 3D Tilt Effect Specifically for Slider Cards
+    document.querySelectorAll('.cert-slider .cert-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -10;
+        const rotateY = ((x - centerX) / centerX) * 10;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+      });
+    });
   </script>
 </body>
 </html>
