@@ -3,24 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ashley Joie S. Limbona's Professional IT Portfolio." />
-  <title>Ashley Joie S. Limbona | IT Portfolio</title>
+  <meta name="description" content="Ashley Joie S. Limbona's Premium IT Portfolio." />
+  <title>Ashley Joie S. Limbona | Premium IT Portfolio</title>
 
   <style>
     /* ================= NEON VIOLET THEME ================= */
     :root {
-      --bg: #0a0014; 
-      --surface: rgba(25, 0, 45, 0.6); 
+      --bg: #050008; 
+      --surface: rgba(25, 0, 45, 0.4); 
       --text-main: #ffffff;
       --text-muted: #b4a5c6;
       --neon: #b026ff; 
-      --neon-glow: rgba(176, 38, 255, 0.4);
       --cyan: #00f3ff; 
       --border: rgba(176, 38, 255, 0.3);
       --max-width: 1100px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; cursor: none; /* Custom cursor hides default */ }
     html { scroll-behavior: smooth; }
     
     body {
@@ -29,10 +28,44 @@
       font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
-      background-image: 
-        radial-gradient(circle at 15% 50%, rgba(176, 38, 255, 0.08), transparent 25%),
-        radial-gradient(circle at 85% 30%, rgba(0, 243, 255, 0.05), transparent 25%);
-      background-attachment: fixed;
+    }
+
+    /* ================= CUSTOM CURSOR ================= */
+    .cursor {
+      width: 8px; height: 8px;
+      background: var(--cyan);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s;
+    }
+    .cursor-follower {
+      width: 30px; height: 30px;
+      border: 2px solid var(--neon);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.3s, background 0.3s;
+      box-shadow: 0 0 15px var(--neon);
+    }
+
+    /* ================= BACKGROUND ORBS ================= */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.4;
+      animation: float 10s infinite ease-in-out alternate;
+    }
+    .orb-1 { width: 400px; height: 400px; background: var(--neon); top: -10%; left: -10%; }
+    .orb-2 { width: 300px; height: 300px; background: var(--cyan); bottom: -10%; right: -10%; animation-delay: -5s; }
+
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
     }
 
     a { color: inherit; text-decoration: none; }
@@ -42,7 +75,7 @@
     /* ================= SCROLL ANIMATIONS ================= */
     .hidden-el {
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(50px);
       transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
     }
     .show-el {
@@ -56,10 +89,9 @@
       width: 100%;
       top: 0;
       z-index: 10;
-      background: rgba(10, 0, 20, 0.8);
-      backdrop-filter: blur(12px);
+      background: rgba(5, 0, 8, 0.6);
+      backdrop-filter: blur(15px);
       border-bottom: 1px solid var(--border);
-      transition: all 0.3s;
     }
     nav {
       height: 70px;
@@ -84,8 +116,8 @@
       transition: all 0.3s;
     }
     .navlinks a:hover {
-      color: var(--neon);
-      text-shadow: 0 0 8px var(--neon);
+      color: var(--cyan);
+      text-shadow: 0 0 10px var(--cyan);
     }
 
     /* ================= HERO ================= */
@@ -108,20 +140,26 @@
       text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
     }
 
-    /* Typing Effect Cursor */
     .typing-text::after {
       content: '|';
       animation: blink 1s infinite;
-      color: var(--neon);
+      color: var(--cyan);
     }
     @keyframes blink { 50% { opacity: 0; } }
 
+    /* Animated Gradient Text */
     h1 {
       font-size: clamp(2.5rem, 5vw, 4.5rem);
       line-height: 1.1;
       margin-bottom: 20px;
       font-weight: 800;
+      background: linear-gradient(90deg, #fff, var(--neon), var(--cyan), #fff);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 5s linear infinite;
     }
+    @keyframes gradientShift { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
     
     .hero p {
       color: var(--text-muted);
@@ -142,14 +180,13 @@
       letter-spacing: 1px;
       transition: all 0.3s;
       position: relative;
-      overflow: hidden;
     }
     
     .btn.primary {
       background: var(--neon);
       color: #fff;
       border: 2px solid var(--neon);
-      box-shadow: 0 0 15px var(--neon-glow);
+      box-shadow: 0 0 15px rgba(176, 38, 255, 0.4);
     }
     .btn.primary:hover {
       background: transparent;
@@ -178,7 +215,7 @@
       background: linear-gradient(45deg, var(--neon), var(--cyan));
       padding: 5px;
       animation: morph 8s ease-in-out infinite;
-      box-shadow: 0 0 40px var(--neon-glow);
+      box-shadow: 0 0 50px rgba(176, 38, 255, 0.5);
     }
     
     .profile-container img {
@@ -209,27 +246,27 @@
     
     .card {
       background: var(--surface);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 35px;
-      transition: all 0.4s ease;
+      transition: transform 0.1s, box-shadow 0.3s;
+      transform-style: preserve-3d; /* For 3D Tilt */
     }
     
     .card:hover {
       border-color: var(--neon);
-      box-shadow: 0 0 25px var(--neon-glow);
-      transform: translateY(-5px);
+      box-shadow: 0 0 30px rgba(176, 38, 255, 0.2);
     }
     
-    .card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--cyan); }
-    .card p { color: var(--text-muted); }
+    .card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--cyan); transform: translateZ(20px); }
+    .card p { color: var(--text-muted); transform: translateZ(10px); }
 
     .detail-row { margin-top: 15px; font-size: 0.95rem; }
     .detail-row strong { color: #fff; display: block; margin-bottom: 4px; font-size: 1.1rem; }
     .detail-row span { color: var(--text-muted); display: block; }
 
-    .pillrow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .pillrow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; transform: translateZ(15px); }
     .pill {
       background: rgba(176, 38, 255, 0.1);
       color: #e0b0ff;
@@ -243,28 +280,29 @@
     .pill:hover {
       background: var(--neon);
       color: #fff;
-      box-shadow: 0 0 10px var(--neon);
+      box-shadow: 0 0 15px var(--neon);
     }
 
     /* ================= CERTIFICATES ================= */
     .cert-card {
       background: var(--surface);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 20px;
       display: flex;
       flex-direction: column;
       gap: 15px;
-      transition: all 0.4s ease;
+      transition: transform 0.1s, box-shadow 0.3s;
+      transform-style: preserve-3d;
     }
     
     .cert-card:hover {
       border-color: var(--cyan);
-      box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+      box-shadow: 0 0 25px rgba(0, 243, 255, 0.3);
     }
 
-    .cert-card h3 { font-size: 1.1rem; color: #fff; text-align: center; }
+    .cert-card h3 { font-size: 1.1rem; color: #fff; text-align: center; transform: translateZ(15px); }
     
     .cert-preview {
       width: 100%;
@@ -272,10 +310,11 @@
       border: 1px solid #333;
       cursor: pointer;
       transition: transform 0.3s;
+      transform: translateZ(10px);
     }
-    .cert-preview:hover { transform: scale(1.03); }
+    .cert-preview:hover { transform: scale(1.03) translateZ(20px); }
     
-    .cert-actions { display: flex; gap: 10px; margin-top: auto; }
+    .cert-actions { display: flex; gap: 10px; margin-top: auto; transform: translateZ(10px); }
     .cert-actions a {
       font-size: 0.85rem;
       padding: 10px 16px;
@@ -312,7 +351,7 @@
       align-items: center;
       gap: 30px;
       flex-wrap: wrap;
-      box-shadow: 0 0 30px rgba(176, 38, 255, 0.1);
+      box-shadow: 0 0 40px rgba(176, 38, 255, 0.15);
     }
     .resume-band h2 { font-size: 2rem; margin-bottom: 10px; }
     .resume-band p { color: var(--text-muted); font-size: 1.1rem; }
@@ -349,6 +388,8 @@
 
     /* ================= RESPONSIVE ================= */
     @media (max-width: 850px) {
+      * { cursor: auto; } /* Bring back normal cursor on mobile */
+      .cursor, .cursor-follower { display: none; }
       .hero { grid-template-columns: 1fr; gap: 50px; text-align: center; padding-top: 120px; padding-bottom: 50px; }
       .hero .actions { justify-content: center; }
       .hero p { margin: 0 auto 35px auto; }
@@ -362,6 +403,14 @@
 </head>
 
 <body>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <!-- BACKGROUND ORBS -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
   <header>
     <div class="wrap">
@@ -408,11 +457,12 @@
           <h2>Driven by Innovation</h2>
         </div>
         <div class="about-grid">
-          <article class="card hidden-el">
+          <!-- Add class "tilt" for 3D hover effect -->
+          <article class="card hidden-el tilt">
             <h3>Career Objective</h3>
             <p>To secure an entry-level position in the IT industry where I can utilize my technical skills, basic network troubleshooting, and knowledge of software applications to contribute to efficient team workflows while continuing to grow professionally.</p>
           </article>
-          <article class="card hidden-el">
+          <article class="card hidden-el tilt">
             <h3>Personal Attributes</h3>
             <p>I am committed to continuous learning, problem-solving, and contributing to efficient team workflows. I possess excellent active listening skills, adaptability, and the ability to quickly adjust to new procedures and environments.</p>
           </article>
@@ -428,7 +478,7 @@
           <h2>Technical Expertise</h2>
         </div>
         <div class="skills-grid">
-          <article class="card hidden-el">
+          <article class="card hidden-el tilt">
             <h3>Technical Skills</h3>
             <div class="pillrow">
               <span class="pill">Hardware Troubleshooting</span>
@@ -440,7 +490,7 @@
               <span class="pill">Social Media Management</span>
             </div>
           </article>
-          <article class="card hidden-el">
+          <article class="card hidden-el tilt">
             <h3>Professional Skills</h3>
             <div class="pillrow">
               <span class="pill">Technical Writing</span>
@@ -465,7 +515,7 @@
 
         <div class="cert-grid">
           <!-- CERT 1 -->
-          <article class="cert-card hidden-el">
+          <article class="cert-card hidden-el tilt">
             <h3>Certificate Title 1</h3>
             <a href="cert1.jpg" target="_blank" rel="noopener">
               <img class="cert-preview" src="cert1.jpg" alt="Certificate 1" />
@@ -477,7 +527,7 @@
           </article>
 
           <!-- CERT 2 -->
-          <article class="cert-card hidden-el">
+          <article class="cert-card hidden-el tilt">
             <h3>Certificate Title 2</h3>
             <a href="cert2.jpg" target="_blank" rel="noopener">
               <img class="cert-preview" src="cert2.jpg" alt="Certificate 2" />
@@ -489,7 +539,7 @@
           </article>
 
           <!-- CERT 3 -->
-          <article class="cert-card hidden-el">
+          <article class="cert-card hidden-el tilt">
             <h3>Certificate Title 3</h3>
             <a href="cert3.jpg" target="_blank" rel="noopener">
               <img class="cert-preview" src="cert3.jpg" alt="Certificate 3" />
@@ -501,7 +551,7 @@
           </article>
 
           <!-- CERT 4 -->
-          <article class="cert-card hidden-el">
+          <article class="cert-card hidden-el tilt">
             <h3>Certificate Title 4</h3>
             <a href="cert4.jpg" target="_blank" rel="noopener">
               <img class="cert-preview" src="cert4.jpg" alt="Certificate 4" />
@@ -540,7 +590,7 @@
           <h2>Let's Connect.</h2>
         </div>
         <div class="contact-grid">
-          <article class="card hidden-el">
+          <article class="card hidden-el tilt">
             <h3>Get in Touch</h3>
             <div class="contact-item">
               <small>Email</small>
@@ -569,19 +619,16 @@
 
   <!-- ================= JAVASCRIPT ================= -->
   <script>
-    // 1. Scroll Animation Logic
+    // 1. Scroll Reveal Animation
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('show-el');
         }
       });
-    }, {
-      threshold: 0.1 // Triggers when 10% of the element is visible
-    });
+    }, { threshold: 0.1 });
 
-    const hiddenElements = document.querySelectorAll('.hidden-el');
-    hiddenElements.forEach((el) => observer.observe(el));
+    document.querySelectorAll('.hidden-el').forEach((el) => observer.observe(el));
 
     // 2. Typing Effect Logic
     const textToType = "Hi, I'm Ashley Joie.";
@@ -592,14 +639,58 @@
       if (i < textToType.length) {
         typewriterElement.innerHTML += textToType.charAt(i);
         i++;
-        setTimeout(typeWriter, 100); // Speed of typing
+        setTimeout(typeWriter, 100);
       }
     }
+    window.onload = function() { setTimeout(typeWriter, 500); };
 
-    // Start typing effect after a slight delay
-    window.onload = function() {
-      setTimeout(typeWriter, 500);
-    };
+    // 3. Custom Glowing Cursor
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      
+      // Follower has a slight delay for a smooth effect
+      setTimeout(() => {
+        follower.style.left = e.clientX + 'px';
+        follower.style.top = e.clientY + 'px';
+      }, 50);
+    });
+
+    // Grow cursor on hover
+    document.querySelectorAll('a, button, .card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        follower.style.transform = 'scale(1.5)';
+        follower.style.background = 'rgba(176, 38, 255, 0.2)';
+      });
+      el.addEventListener('mouseleave', () => {
+        follower.style.transform = 'scale(1)';
+        follower.style.background = 'transparent';
+      });
+    });
+
+    // 4. 3D Tilt Effect on Cards
+    document.querySelectorAll('.tilt').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg tilt
+        const rotateY = ((x - centerX) / centerX) * 10;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+      });
+    });
   </script>
 
 </body>
