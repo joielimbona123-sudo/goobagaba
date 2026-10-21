@@ -419,6 +419,70 @@
       .navlinks { display: none; }
       .profile-container { width: 250px; height: 250px; }
     }
+      /* ================= HORIZONTAL SLIDER CSS ================= */
+    .slider-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .slider-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--cyan);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: grid;
+      place-items: center;
+      backdrop-filter: blur(10px);
+    }
+    
+    .slider-btn:hover {
+      background: var(--neon);
+      color: #fff;
+      box-shadow: 0 0 20px var(--neon);
+      border-color: var(--neon);
+    }
+
+    .cert-slider-wrap {
+      position: relative;
+      padding: 20px 0;
+      /* Fade effect on edges */
+      mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    }
+
+    .cert-slider {
+      display: flex;
+      gap: 30px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding-bottom: 20px;
+      /* Hide scrollbar for clean look */
+      -ms-overflow-style: none;  
+      scrollbar-width: none;  
+    }
+    
+    .cert-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cert-slider .cert-card {
+      flex: 0 0 320px; /* Fixed width for cards in slider */
+      scroll-snap-align: start;
+      transform-style: flat; /* Disable 3D tilt for horizontal scrolling */
+    }
+    
+    /* Adjust card size for mobile */
+    @media (max-width: 600px) {
+      .cert-slider .cert-card {
+        flex: 0 0 260px;
+      }
+    }
   </style>
 </head>
 
@@ -524,219 +588,230 @@
       </div>
     </section>
 
-    <!-- PROFDEV CERTIFICATES -->
+        <!-- PROFDEV CERTIFICATES -->
     <section id="profdev">
       <div class="wrap">
-        <div class="section-head hidden-el">
-          <div class="eyebrow">Professional Development</div>
-          <h2>My Certificates</h2>
+        <div class="section-head hidden-el" style="text-align: left; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;">
+          <div>
+            <div class="eyebrow">Professional Development</div>
+            <h2>My Certificates</h2>
+          </div>
+          
+          <!-- Slider Navigation Buttons -->
+          <div class="slider-buttons">
+            <button id="slide-left" class="slider-btn" aria-label="Previous">&#8592;</button>
+            <button id="slide-right" class="slider-btn" aria-label="Next">&#8594;</button>
+          </div>
         </div>
 
-        <div class="cert-grid">
-          
-          <!-- ================= TESDA (5) ================= -->
-          <article class="cert-card hidden-el tilt">
-            <h3>TESDA</h3>
-            <a href="1.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="1.jpg" alt="TESDA Certificate 1" />
-            </a>
-            <div class="cert-actions">
-              <a href="1.jpg" target="_blank" rel="noopener">View</a>
-              <a href="1.jpg" download="TESDA-1.jpg" class="download">Download</a>
-            </div>
-          </article>
+        <!-- Horizontal Slider Container -->
+        <div class="cert-slider-wrap hidden-el">
+          <div class="cert-slider" id="cert-slider">
+            
+            <!-- ================= TESDA (5) ================= -->
+            <article class="cert-card">
+              <h3>TESDA</h3>
+              <a href="1.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="1.jpg" alt="TESDA Certificate 1" />
+              </a>
+              <div class="cert-actions">
+                <a href="1.jpg" target="_blank" rel="noopener">View</a>
+                <a href="1.jpg" download="TESDA-1.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <article class="cert-card hidden-el tilt">
-            <h3>TESDA</h3>
-            <a href="2.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="2.jpg" alt="TESDA Certificate 2" />
-            </a>
-            <div class="cert-actions">
-              <a href="2.jpg" target="_blank" rel="noopener">View</a>
-              <a href="2.jpg" download="TESDA-2.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <article class="cert-card">
+              <h3>TESDA</h3>
+              <a href="2.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="2.jpg" alt="TESDA Certificate 2" />
+              </a>
+              <div class="cert-actions">
+                <a href="2.jpg" target="_blank" rel="noopener">View</a>
+                <a href="2.jpg" download="TESDA-2.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <article class="cert-card hidden-el tilt">
-            <h3>TESDA</h3>
-            <a href="3.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="3.jpg" alt="TESDA Certificate 3" />
-            </a>
-            <div class="cert-actions">
-              <a href="3.jpg" target="_blank" rel="noopener">View</a>
-              <a href="3.jpg" download="TESDA-3.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <article class="cert-card">
+              <h3>TESDA</h3>
+              <a href="3.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="3.jpg" alt="TESDA Certificate 3" />
+              </a>
+              <div class="cert-actions">
+                <a href="3.jpg" target="_blank" rel="noopener">View</a>
+                <a href="3.jpg" download="TESDA-3.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <article class="cert-card hidden-el tilt">
-            <h3>TESDA</h3>
-            <a href="4.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="4.jpg" alt="TESDA Certificate 4" />
-            </a>
-            <div class="cert-actions">
-              <a href="4.jpg" target="_blank" rel="noopener">View</a>
-              <a href="4.jpg" download="TESDA-4.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <article class="cert-card">
+              <h3>TESDA</h3>
+              <a href="4.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="4.jpg" alt="TESDA Certificate 4" />
+              </a>
+              <div class="cert-actions">
+                <a href="4.jpg" target="_blank" rel="noopener">View</a>
+                <a href="4.jpg" download="TESDA-4.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <article class="cert-card hidden-el tilt">
-            <h3>TESDA</h3>
-            <a href="5.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="5.jpg" alt="TESDA Certificate 5" />
-            </a>
-            <div class="cert-actions">
-              <a href="5.jpg" target="_blank" rel="noopener">View</a>
-              <a href="5.jpg" download="TESDA-5.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <article class="cert-card">
+              <h3>TESDA</h3>
+              <a href="5.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="5.jpg" alt="TESDA Certificate 5" />
+              </a>
+              <div class="cert-actions">
+                <a href="5.jpg" target="_blank" rel="noopener">View</a>
+                <a href="5.jpg" download="TESDA-5.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <!-- ================= DICT (4) ================= -->
-          <article class="cert-card hidden-el tilt">
-            <h3>DICT</h3>
-            <a href="dict1.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="dict1.jpg" alt="DICT Certificate 1" />
-            </a>
-            <div class="cert-actions">
-              <a href="dict1.jpg" target="_blank" rel="noopener">View</a>
-              <a href="dict1.jpg" download="DICT-1.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <!-- ================= DICT (4) ================= -->
+            <article class="cert-card">
+              <h3>DICT</h3>
+              <a href="dict1.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="dict1.jpg" alt="DICT Certificate 1" />
+              </a>
+              <div class="cert-actions">
+                <a href="dict1.jpg" target="_blank" rel="noopener">View</a>
+                <a href="dict1.jpg" download="DICT-1.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <article class="cert-card hidden-el tilt">
-            <h3>DICT</h3>
-            <a href="dict2.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="dict2.jpg" alt="DICT Certificate 2" />
-            </a>
-            <div class="cert-actions">
-              <a href="dict2.jpg" target="_blank" rel="noopener">View</a>
-              <a href="dict2.jpg" download="DICT-2.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <article class="cert-card">
+              <h3>DICT</h3>
+              <a href="dict2.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="dict2.jpg" alt="DICT Certificate 2" />
+              </a>
+              <div class="cert-actions">
+                <a href="dict2.jpg" target="_blank" rel="noopener">View</a>
+                <a href="dict2.jpg" download="DICT-2.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <article class="cert-card hidden-el tilt">
-            <h3>DICT</h3>
-            <a href="dict3.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="dict3.jpg" alt="DICT Certificate 3" />
-            </a>
-            <div class="cert-actions">
-              <a href="dict3.jpg" target="_blank" rel="noopener">View</a>
-              <a href="dict3.jpg" download="DICT-3.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <article class="cert-card">
+              <h3>DICT</h3>
+              <a href="dict3.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="dict3.jpg" alt="DICT Certificate 3" />
+              </a>
+              <div class="cert-actions">
+                <a href="dict3.jpg" target="_blank" rel="noopener">View</a>
+                <a href="dict3.jpg" download="DICT-3.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <article class="cert-card hidden-el tilt">
-            <h3>DICT</h3>
-            <a href="dict4.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="dict4.jpg" alt="DICT Certificate 4" />
-            </a>
-            <div class="cert-actions">
-              <a href="dict4.jpg" target="_blank" rel="noopener">View</a>
-              <a href="dict4.jpg" download="DICT-4.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <article class="cert-card">
+              <h3>DICT</h3>
+              <a href="dict4.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="dict4.jpg" alt="DICT Certificate 4" />
+              </a>
+              <div class="cert-actions">
+                <a href="dict4.jpg" target="_blank" rel="noopener">View</a>
+                <a href="dict4.jpg" download="DICT-4.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <!-- ================= MICROSOFT LEARN (4) ================= -->
-          <article class="cert-card hidden-el tilt">
-            <h3>Microsoft Learn</h3>
-            <a href="m1.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="m1.jpg" alt="Microsoft Learn Certificate 1" />
-            </a>
-            <div class="cert-actions">
-              <a href="m1.jpg" target="_blank" rel="noopener">View</a>
-              <a href="m1.jpg" download="Microsoft-Learn-1.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <!-- ================= MICROSOFT LEARN (4) ================= -->
+            <article class="cert-card">
+              <h3>Microsoft Learn</h3>
+              <a href="m1.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="m1.jpg" alt="Microsoft Learn Certificate 1" />
+              </a>
+              <div class="cert-actions">
+                <a href="m1.jpg" target="_blank" rel="noopener">View</a>
+                <a href="m1.jpg" download="Microsoft-Learn-1.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <article class="cert-card hidden-el tilt">
-            <h3>Microsoft Learn</h3>
-            <a href="m2.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="m2.jpg" alt="Microsoft Learn Certificate 2" />
-            </a>
-            <div class="cert-actions">
-              <a href="m2.jpg" target="_blank" rel="noopener">View</a>
-              <a href="m2.jpg" download="Microsoft-Learn-2.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <article class="cert-card">
+              <h3>Microsoft Learn</h3>
+              <a href="m2.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="m2.jpg" alt="Microsoft Learn Certificate 2" />
+              </a>
+              <div class="cert-actions">
+                <a href="m2.jpg" target="_blank" rel="noopener">View</a>
+                <a href="m2.jpg" download="Microsoft-Learn-2.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <article class="cert-card hidden-el tilt">
-            <h3>Microsoft Learn</h3>
-            <a href="m3.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="m3.jpg" alt="Microsoft Learn Certificate 3" />
-            </a>
-            <div class="cert-actions">
-              <a href="m3.jpg" target="_blank" rel="noopener">View</a>
-              <a href="m3.jpg" download="Microsoft-Learn-3.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <article class="cert-card">
+              <h3>Microsoft Learn</h3>
+              <a href="m3.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="m3.jpg" alt="Microsoft Learn Certificate 3" />
+              </a>
+              <div class="cert-actions">
+                <a href="m3.jpg" target="_blank" rel="noopener">View</a>
+                <a href="m3.jpg" download="Microsoft-Learn-3.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <article class="cert-card hidden-el tilt">
-            <h3>Microsoft Learn</h3>
-            <a href="m4.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="m4.jpg" alt="Microsoft Learn Certificate 4" />
-            </a>
-            <div class="cert-actions">
-              <a href="m4.jpg" target="_blank" rel="noopener">View</a>
-              <a href="m4.jpg" download="Microsoft-Learn-4.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <article class="cert-card">
+              <h3>Microsoft Learn</h3>
+              <a href="m4.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="m4.jpg" alt="Microsoft Learn Certificate 4" />
+              </a>
+              <div class="cert-actions">
+                <a href="m4.jpg" target="_blank" rel="noopener">View</a>
+                <a href="m4.jpg" download="Microsoft-Learn-4.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <!-- ================= NORTHEASTERN COLLEGE (4) ================= -->
-          <article class="cert-card hidden-el tilt">
-            <h3>Northeastern College</h3>
-            <a href="nc1.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="nc1.jpg" alt="Northeastern College Certificate 1" />
-            </a>
-            <div class="cert-actions">
-              <a href="nc1.jpg" target="_blank" rel="noopener">View</a>
-              <a href="nc1.jpg" download="Northeastern-1.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <!-- ================= NORTHEASTERN COLLEGE (4) ================= -->
+            <article class="cert-card">
+              <h3>Northeastern College</h3>
+              <a href="nc1.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="nc1.jpg" alt="Northeastern College Certificate 1" />
+              </a>
+              <div class="cert-actions">
+                <a href="nc1.jpg" target="_blank" rel="noopener">View</a>
+                <a href="nc1.jpg" download="Northeastern-1.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <article class="cert-card hidden-el tilt">
-            <h3>Northeastern College</h3>
-            <a href="nc2.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="nc2.jpg" alt="Northeastern College Certificate 2" />
-            </a>
-            <div class="cert-actions">
-              <a href="nc2.jpg" target="_blank" rel="noopener">View</a>
-              <a href="nc2.jpg" download="Northeastern-2.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <article class="cert-card">
+              <h3>Northeastern College</h3>
+              <a href="nc2.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="nc2.jpg" alt="Northeastern College Certificate 2" />
+              </a>
+              <div class="cert-actions">
+                <a href="nc2.jpg" target="_blank" rel="noopener">View</a>
+                <a href="nc2.jpg" download="Northeastern-2.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <article class="cert-card hidden-el tilt">
-            <h3>Northeastern College</h3>
-            <a href="nc3.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="nc3.jpg" alt="Northeastern College Certificate 3" />
-            </a>
-            <div class="cert-actions">
-              <a href="nc3.jpg" target="_blank" rel="noopener">View</a>
-              <a href="nc3.jpg" download="Northeastern-3.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <article class="cert-card">
+              <h3>Northeastern College</h3>
+              <a href="nc3.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="nc3.jpg" alt="Northeastern College Certificate 3" />
+              </a>
+              <div class="cert-actions">
+                <a href="nc3.jpg" target="_blank" rel="noopener">View</a>
+                <a href="nc3.jpg" download="Northeastern-3.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <article class="cert-card hidden-el tilt">
-            <h3>Northeastern College</h3>
-            <a href="nc4.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="nc4.jpg" alt="Northeastern College Certificate 4" />
-            </a>
-            <div class="cert-actions">
-              <a href="nc4.jpg" target="_blank" rel="noopener">View</a>
-              <a href="nc4.jpg" download="Northeastern-4.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <article class="cert-card">
+              <h3>Northeastern College</h3>
+              <a href="nc4.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="nc4.jpg" alt="Northeastern College Certificate 4" />
+              </a>
+              <div class="cert-actions">
+                <a href="nc4.jpg" target="_blank" rel="noopener">View</a>
+                <a href="nc4.jpg" download="Northeastern-4.jpg" class="download">Save</a>
+              </div>
+            </article>
 
-          <!-- ================= NETACAD (1) ================= -->
-          <article class="cert-card hidden-el tilt">
-            <h3>NetAcad</h3>
-            <a href="net1.jpg" target="_blank" rel="noopener">
-              <img class="cert-preview" src="net1.jpg" alt="NetAcad Certificate" />
-            </a>
-            <div class="cert-actions">
-              <a href="net1.jpg" target="_blank" rel="noopener">View</a>
-              <a href="net1.jpg" download="NetAcad-1.jpg" class="download">Download</a>
-            </div>
-          </article>
+            <!-- ================= NETACAD (1) ================= -->
+            <article class="cert-card">
+              <h3>NetAcad</h3>
+              <a href="net1.jpg" target="_blank" rel="noopener">
+                <img class="cert-preview" src="net1.jpg" alt="NetAcad Certificate" />
+              </a>
+              <div class="cert-actions">
+                <a href="net1.jpg" target="_blank" rel="noopener">View</a>
+                <a href="net1.jpg" download="NetAcad-1.jpg" class="download">Save</a>
+              </div>
+            </article>
 
+          </div>
         </div>
       </div>
     </section>
@@ -790,7 +865,7 @@
   </footer>
 
   <!-- ================= JAVASCRIPT ================= -->
-  <script>
+<script>
     // 1. Scroll Reveal Animation
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -861,7 +936,24 @@
         card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
       });
     });
-  </script>
 
+    // 5. Horizontal Certificate Slider Buttons
+    const slider = document.getElementById('cert-slider');
+    const btnLeft = document.getElementById('slide-left');
+    const btnRight = document.getElementById('slide-right');
+
+    if (slider && btnLeft && btnRight) {
+      // Scroll amount (roughly the width of one card + gap)
+      const scrollAmount = 350; 
+
+      btnLeft.addEventListener('click', () => {
+        slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+
+      btnRight.addEventListener('click', () => {
+        slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+    }
+  </script>
 </body>
 </html>
