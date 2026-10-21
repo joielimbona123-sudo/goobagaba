@@ -1,38 +1,606 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ashley Joie S. Limbona's Professional IT Portfolio." />
+  <title>Ashley Joie S. Limbona | IT Portfolio</title>
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+  <style>
+    /* ================= NEON VIOLET THEME ================= */
+    :root {
+      --bg: #0a0014; 
+      --surface: rgba(25, 0, 45, 0.6); 
+      --text-main: #ffffff;
+      --text-muted: #b4a5c6;
+      --neon: #b026ff; 
+      --neon-glow: rgba(176, 38, 255, 0.4);
+      --cyan: #00f3ff; 
+      --border: rgba(176, 38, 255, 0.3);
+      --max-width: 1100px;
+    }
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(176, 38, 255, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(0, 243, 255, 0.05), transparent 25%);
+      background-attachment: fixed;
+    }
 
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .wrap { width: min(var(--max-width), calc(100% - 40px)); margin: 0 auto; }
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+    /* ================= SCROLL ANIMATIONS ================= */
+    .hidden-el {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+    }
+    .show-el {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="expense_app">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    /* ================= HEADER ================= */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+      background: rgba(10, 0, 20, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    nav {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 0 0 10px var(--neon);
+    }
+    .navlinks { display: flex; gap: 25px; }
+    .navlinks a {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      transition: all 0.3s;
+    }
+    .navlinks a:hover {
+      color: var(--neon);
+      text-shadow: 0 0 8px var(--neon);
+    }
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+    /* ================= HERO ================= */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+      padding-top: 70px;
+    }
+    
+    .eyebrow {
+      color: var(--cyan);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+    }
 
-  <title>expense_app</title>
-  <link rel="manifest" href="manifest.json">
+    /* Typing Effect Cursor */
+    .typing-text::after {
+      content: '|';
+      animation: blink 1s infinite;
+      color: var(--neon);
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+    
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 35px;
+      max-width: 500px;
+    }
+
+    .actions { display: flex; gap: 20px; flex-wrap: wrap; }
+    
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn.primary {
+      background: var(--neon);
+      color: #fff;
+      border: 2px solid var(--neon);
+      box-shadow: 0 0 15px var(--neon-glow);
+    }
+    .btn.primary:hover {
+      background: transparent;
+      box-shadow: 0 0 30px var(--neon);
+      transform: translateY(-3px);
+    }
+    
+    .btn.secondary {
+      background: transparent;
+      color: #fff;
+      border: 2px solid var(--border);
+    }
+    .btn.secondary:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+      transform: translateY(-3px);
+    }
+
+    /* Morphing Photo */
+    .profile-container {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      margin: 0 auto;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      background: linear-gradient(45deg, var(--neon), var(--cyan));
+      padding: 5px;
+      animation: morph 8s ease-in-out infinite;
+      box-shadow: 0 0 40px var(--neon-glow);
+    }
+    
+    .profile-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+      background: #000;
+    }
+
+    @keyframes morph {
+      0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+      50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+    }
+
+    /* ================= SECTIONS ================= */
+    section { padding: 100px 0; }
+    .section-head { margin-bottom: 50px; text-align: center; }
+    .section-head h2 { font-size: 2.5rem; margin-bottom: 10px; text-shadow: 0 0 15px rgba(255,255,255,0.1); }
+    .section-head p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+    /* ================= GLASS CARDS ================= */
+    .about-grid, .skills-grid, .project-grid, .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 30px;
+    }
+    
+    .card {
+      background: var(--surface);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 35px;
+      transition: all 0.4s ease;
+    }
+    
+    .card:hover {
+      border-color: var(--neon);
+      box-shadow: 0 0 25px var(--neon-glow);
+      transform: translateY(-5px);
+    }
+    
+    .card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--cyan); }
+    .card p { color: var(--text-muted); }
+
+    .detail-row { margin-top: 15px; font-size: 0.95rem; }
+    .detail-row strong { color: #fff; display: block; margin-bottom: 4px; font-size: 1.1rem; }
+    .detail-row span { color: var(--text-muted); display: block; }
+
+    .pillrow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .pill {
+      background: rgba(176, 38, 255, 0.1);
+      color: #e0b0ff;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    .pill:hover {
+      background: var(--neon);
+      color: #fff;
+      box-shadow: 0 0 10px var(--neon);
+    }
+
+    /* ================= CERTIFICATES ================= */
+    .cert-card {
+      background: var(--surface);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      transition: all 0.4s ease;
+    }
+    
+    .cert-card:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+    }
+
+    .cert-card h3 { font-size: 1.1rem; color: #fff; text-align: center; }
+    
+    .cert-preview {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #333;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .cert-preview:hover { transform: scale(1.03); }
+    
+    .cert-actions { display: flex; gap: 10px; margin-top: auto; }
+    .cert-actions a {
+      font-size: 0.85rem;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: center;
+      flex: 1;
+      transition: all 0.3s;
+    }
+    .cert-actions a:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+    .cert-actions a.download {
+      background: var(--neon);
+      color: #fff;
+      border-color: var(--neon);
+    }
+    .cert-actions a.download:hover { 
+      box-shadow: 0 0 15px var(--neon);
+    }
+
+    /* ================= RESUME ================= */
+    .resume-band {
+      background: linear-gradient(135deg, rgba(176, 38, 255, 0.15), rgba(0, 243, 255, 0.1));
+      border: 1px solid var(--neon);
+      border-radius: 16px;
+      padding: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      box-shadow: 0 0 30px rgba(176, 38, 255, 0.1);
+    }
+    .resume-band h2 { font-size: 2rem; margin-bottom: 10px; }
+    .resume-band p { color: var(--text-muted); font-size: 1.1rem; }
+
+    /* ================= CONTACT ================= */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .contact-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-item small {
+      display: block;
+      font-weight: 800;
+      color: var(--cyan);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .contact-item a, .contact-item span { font-size: 1.1rem; font-weight: 500; }
+    .contact-item a:hover { 
+      color: var(--neon);
+      text-shadow: 0 0 10px var(--neon);
+    }
+
+    /* ================= FOOTER ================= */
+    footer {
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 850px) {
+      .hero { grid-template-columns: 1fr; gap: 50px; text-align: center; padding-top: 120px; padding-bottom: 50px; }
+      .hero .actions { justify-content: center; }
+      .hero p { margin: 0 auto 35px auto; }
+      .about-grid, .skills-grid, .project-grid, .cert-grid, .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .navlinks { display: none; }
+      .profile-container { width: 250px; height: 250px; }
+    }
+  </style>
 </head>
+
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+
+  <header>
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="#home">ASHLEY JOIE<span>.</span></a>
+        <div class="navlinks">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#profdev">Certificates</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <div class="wrap hero" id="home">
+      <div class="hidden-el">
+        <div class="eyebrow">Information Technology Student</div>
+        <!-- JAVASCRIPT TYPING EFFECT TARGET -->
+        <h1 class="typing-text" id="typewriter"></h1>
+        <p>Motivated BSIT student eager to apply technical skills in computer systems, basic network troubleshooting, and software applications in a dynamic IT support role.</p>
+        <div class="actions">
+          <a class="btn primary" href="#profdev">View Certificates</a>
+          <a class="btn secondary" href="#resume">Download Resume</a>
+        </div>
+      </div>
+      
+      <div class="hidden-el">
+        <div class="profile-container">
+          <!-- ENSURE HER PHOTO IS NAMED profile.jpg -->
+          <img src="profile.jpg" alt="Ashley Joie S. Limbona" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head hidden-el">
+          <div class="eyebrow">About Me</div>
+          <h2>Driven by Innovation</h2>
+        </div>
+        <div class="about-grid">
+          <article class="card hidden-el">
+            <h3>Career Objective</h3>
+            <p>To secure an entry-level position in the IT industry where I can utilize my technical skills, basic network troubleshooting, and knowledge of software applications to contribute to efficient team workflows while continuing to grow professionally.</p>
+          </article>
+          <article class="card hidden-el">
+            <h3>Personal Attributes</h3>
+            <p>I am committed to continuous learning, problem-solving, and contributing to efficient team workflows. I possess excellent active listening skills, adaptability, and the ability to quickly adjust to new procedures and environments.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="wrap">
+        <div class="section-head hidden-el">
+          <div class="eyebrow">Skills</div>
+          <h2>Technical Expertise</h2>
+        </div>
+        <div class="skills-grid">
+          <article class="card hidden-el">
+            <h3>Technical Skills</h3>
+            <div class="pillrow">
+              <span class="pill">Hardware Troubleshooting</span>
+              <span class="pill">Network Troubleshooting</span>
+              <span class="pill">HTML & CSS</span>
+              <span class="pill">Basic Programming</span>
+              <span class="pill">Microsoft Office</span>
+              <span class="pill">Google Workspace</span>
+              <span class="pill">Social Media Management</span>
+            </div>
+          </article>
+          <article class="card hidden-el">
+            <h3>Professional Skills</h3>
+            <div class="pillrow">
+              <span class="pill">Technical Writing</span>
+              <span class="pill">Problem Solving</span>
+              <span class="pill">Critical Thinking</span>
+              <span class="pill">Time Management</span>
+              <span class="pill">Active Listening</span>
+              <span class="pill">Communication</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFDEV CERTIFICATES -->
+    <section id="profdev">
+      <div class="wrap">
+        <div class="section-head hidden-el">
+          <div class="eyebrow">Professional Development</div>
+          <h2>My Certificates</h2>
+        </div>
+
+        <div class="cert-grid">
+          <!-- CERT 1 -->
+          <article class="cert-card hidden-el">
+            <h3>Certificate Title 1</h3>
+            <a href="cert1.jpg" target="_blank" rel="noopener">
+              <img class="cert-preview" src="cert1.jpg" alt="Certificate 1" />
+            </a>
+            <div class="cert-actions">
+              <a href="cert1.jpg" target="_blank" rel="noopener">View</a>
+              <a href="cert1.jpg" download="Certificate-1.jpg" class="download">Download</a>
+            </div>
+          </article>
+
+          <!-- CERT 2 -->
+          <article class="cert-card hidden-el">
+            <h3>Certificate Title 2</h3>
+            <a href="cert2.jpg" target="_blank" rel="noopener">
+              <img class="cert-preview" src="cert2.jpg" alt="Certificate 2" />
+            </a>
+            <div class="cert-actions">
+              <a href="cert2.jpg" target="_blank" rel="noopener">View</a>
+              <a href="cert2.jpg" download="Certificate-2.jpg" class="download">Download</a>
+            </div>
+          </article>
+
+          <!-- CERT 3 -->
+          <article class="cert-card hidden-el">
+            <h3>Certificate Title 3</h3>
+            <a href="cert3.jpg" target="_blank" rel="noopener">
+              <img class="cert-preview" src="cert3.jpg" alt="Certificate 3" />
+            </a>
+            <div class="cert-actions">
+              <a href="cert3.jpg" target="_blank" rel="noopener">View</a>
+              <a href="cert3.jpg" download="Certificate-3.jpg" class="download">Download</a>
+            </div>
+          </article>
+
+          <!-- CERT 4 -->
+          <article class="cert-card hidden-el">
+            <h3>Certificate Title 4</h3>
+            <a href="cert4.jpg" target="_blank" rel="noopener">
+              <img class="cert-preview" src="cert4.jpg" alt="Certificate 4" />
+            </a>
+            <div class="cert-actions">
+              <a href="cert4.jpg" target="_blank" rel="noopener">View</a>
+              <a href="cert4.jpg" download="Certificate-4.jpg" class="download">Download</a>
+            </div>
+          </article>
+          
+          <!-- ADD MORE CERTIFICATES HERE -->
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUME DOWNLOAD -->
+    <section id="resume">
+      <div class="wrap">
+        <div class="resume-band hidden-el">
+          <div>
+            <h2>Download my Resume</h2>
+            <p>Get a detailed overview of my education, skills, and experience.</p>
+          </div>
+          <!-- MAKE SURE THE FILE IS NAMED resume.pdf -->
+          <a class="btn primary" href="resume.pdf" download="Ashley-Joie-Limbona-Resume.pdf">Download PDF</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="wrap">
+        <div class="section-head hidden-el">
+          <div class="eyebrow">Contact</div>
+          <h2>Let's Connect.</h2>
+        </div>
+        <div class="contact-grid">
+          <article class="card hidden-el">
+            <h3>Get in Touch</h3>
+            <div class="contact-item">
+              <small>Email</small>
+              <a href="mailto:joielimbona@gmail.com">joielimbona@gmail.com</a>
+            </div>
+            <div class="contact-item">
+              <small>Phone</small>
+              <a href="tel:+639557098927">+63 955 709 8927</a>
+            </div>
+            <div class="contact-item">
+              <small>Address</small>
+              <span>Naggasican, Santiago City, Isabela, 3311</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>© 2026 Ashley Joie S. Limbona. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // 1. Scroll Animation Logic
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show-el');
+        }
+      });
+    }, {
+      threshold: 0.1 // Triggers when 10% of the element is visible
+    });
+
+    const hiddenElements = document.querySelectorAll('.hidden-el');
+    hiddenElements.forEach((el) => observer.observe(el));
+
+    // 2. Typing Effect Logic
+    const textToType = "Hi, I'm Ashley Joie.";
+    const typewriterElement = document.getElementById("typewriter");
+    let i = 0;
+
+    function typeWriter() {
+      if (i < textToType.length) {
+        typewriterElement.innerHTML += textToType.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100); // Speed of typing
+      }
+    }
+
+    // Start typing effect after a slight delay
+    window.onload = function() {
+      setTimeout(typeWriter, 500);
+    };
+  </script>
+
 </body>
 </html>
